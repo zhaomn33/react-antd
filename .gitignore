@@ -1,12 +1,7 @@
-
+# misc
 .DS_Store
-
+*.local
 .vscode
 
-/.babel_cache
-/.env
-
-/build.xml
-
+# dependencies
 /node_modules/
-/plugins
