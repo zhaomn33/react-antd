@@ -1,0 +1,12 @@
+
+.DS_Store
+
+.vscode
+
+/.babel_cache
+/.env
+
+/build.xml
+
+/node_modules/
+/plugins
