@@ -6,7 +6,7 @@ import logo from '../logo.svg'
 
 const demoReact = () => {
   return (
-    <div>
+    <div className='demo'>
       demo
     </div>
   )
