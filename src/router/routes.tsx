@@ -6,11 +6,11 @@ import Login from '@/modules/Login/index'
 import Home from '@/modules/Home/index'
 import ErrorPage from '@/error-page'
 /* 👉 demo existing imports */
-import Root, { loader as rootLoader, action as rootAction, } from '@/router/root'
-import Contact, { loader as contactLoader, action as contactAction, } from "@/router/contact";
-import EditContact, { action as editAction }  from "@/router/edit";
-import { action as destroyAction } from "@/router/destroy";
-import Index from "@/router/index";
+import Root, { loader as rootLoader, action as rootAction, } from '@/demo/root'
+import Contact, { loader as contactLoader, action as contactAction, } from "@/demo/contact";
+import EditContact, { action as editAction }  from "@/demo/edit";
+import { action as destroyAction } from "@/demo/destroy";
+import Index from "@/demo/index";
 
 const Routes = createBrowserRouter([
   // 👉 demo:
