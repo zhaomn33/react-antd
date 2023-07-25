@@ -1,14 +1,36 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData, useFetcher } from "react-router-dom";
+// 👉 useFetcher 钩子，它能让我们在不引起导航的情况下与加载器和操作进行通信。
+import { getContact, updateContact } from "@/contacts";
+
+export async function loader({ params }) {
+  const contact = await getContact(params.contactId);
+  // 👉 避免网络延迟，或错误情况，需要在加载器中抛出404响应
+  if (!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+  return { contact };
+}
+
+export async function action({ request, params }) {
+  let formData = await request.formData();
+  return updateContact(params.contactId, {
+    favorite: formData.get("favorite") === "true",
+  });
+}
 
 export default function Contact() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placekitten.com/g/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+  // const contact = {
+  //   first: "Your",
+  //   last: "Name",
+  //   avatar: "https://placekitten.com/g/200/200",
+  //   twitter: "your_handle",
+  //   notes: "Some notes",
+  //   favorite: true,
+  // };
+  const { contact } = useLoaderData();
 
   return (
     <div id="contact">
@@ -59,18 +81,29 @@ export default function Contact() {
   );
 }
 
+// 收藏按钮事件
 function Favorite({ contact }) {
-  // yes, this is a `let` for later
+  const fetcher = useFetcher();
+
   let favorite = contact.favorite;
+  // 👉 解决点击"☆"迟钝问题：fetcher 的 formData 属性获取表单的数据 提前更新
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get("favorite") === "true";
+  }
+
   return (
-    <Form method="post">
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
-        aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
+        aria-label={
+          favorite
+            ? "Remove from favorites"
+            : "Add to favorites"
+        }
       >
         {favorite ? "★" : "☆"}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 }
