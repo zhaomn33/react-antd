@@ -26,7 +26,7 @@ export default function EditContact() {
   return (
     <Form method="post" id="contact-form">
       <p>
-        <span>Name</span>
+        <span className="text-red-400 text-[30px]">Name</span>
         <input
           placeholder="First"
           aria-label="First name"

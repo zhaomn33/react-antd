@@ -3,7 +3,7 @@
 ### `pnpm install`
 
 ## Run
-### `pnpm start`
+### `pnpm dev`
 
 ## 注释内容
 ### `搜索 -> 👉`
