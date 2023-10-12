@@ -8,6 +8,8 @@ module.exports = {
     },
     padding: ({ theme }) => theme('spacing')
   },
-
+  corePlugins: { // 防止样式被tailwindcss覆盖
+    preflight: false,
+  },
   plugins: []
 }
